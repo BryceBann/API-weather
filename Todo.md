@@ -13,4 +13,3 @@ Mock-Up
 
 -function to take user input and run through api and pull data, saves search history from user
 -function to display current and future weather of the day and city adds to search history 
--
