@@ -13,7 +13,14 @@ header{
 }
 
 #intro{
-    margin-top: 1rem;
+    
     text-align: center;
     font-size: 3rem;
+}
+
+.col{
+    height: 5rem;
+    width: 5rem;
+    border: 2px solid black;
+    background-color: red;
 }
