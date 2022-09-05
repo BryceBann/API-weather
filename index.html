@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+   
+    <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:blue ; color:white;">
+        <h1><strong>Weather forecast</strong></h1>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -27,7 +31,40 @@
                 </ul>
             </div>
             <div class="col-8">
-                <div class=""
+                <div class="row border border-dark rounded">
+                    <div class="col-sm-12">
+                        <h3 class="cityName bolder"></h3>
+                        <p>Temp:<span class="current" id="temp"></span></p>
+                        <p>Wind:<span class="current" id="wind"></span></p>
+                        <p>Humity:<span class="current" id="humity"></span></p>
+                        <p>UV index:<span class="current" id="uvIndex"></span></p>
+                    </div>
+                </div>
+                <div class="col-sm-12" id="futureWeather">
+                    <h2>5 Day-forecast</h2>
+                    <div class="row text-light">
+                        <div class="col-sm-2 bg-primary rounded">
+                            <p>temp:<span class="future0"></span></p>
+                            <p>Hum:<span class="future0"></span></p>
+                        </div>
+                        <div class="col-sm-2 bg-primary rounded">
+                            <p>temp:<span class="future0"></span></p>
+                            <p>Hum:<span class="future0"></span></p>
+                        </div>
+                        <div class="col-sm-2 bg-primary rounded">
+                            <p>temp:<span class="future0"></span></p>
+                            <p>Hum:<span class="future0"></span></p>
+                        </div>
+                        <div class="col-sm-2 bg-primary rounded">
+                            <p>temp:<span class="future0"></span></p>
+                            <p>Hum:<span class="future0"></span></p>
+                        </div>
+                        <div class="col-sm-2 bg-primary rounded">
+                            <p>temp:<span class="future0"></span></p>
+                            <p>Hum:<span class="future0"></span></p>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     </div>
