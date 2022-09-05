@@ -17,7 +17,7 @@
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-4">
+            <div class="col-4" id="searchArea">
                 <h4 class="top-1"><strong>Search city</strong></h4>
                 <div class="input-group">
                     <input type="text" class="form-control" id="citySearch" placeholder="Enter city">
@@ -30,13 +30,13 @@
 
                 </ul>
             </div>
-            <div class="col-8">
+            <div class="col-8" id="todayWeather">
                 <div class="row border border-dark rounded">
                     <div class="col-sm-12">
-                        <h3 class="cityName bolder"></h3>
+                        <h3 class="cityName bolder" id="currentCity"></h3>
                         <p>Temperature:<span class="current" id="temp"></span></p>
                         <p>Wind Speed:<span class="current" id="wind"></span></p>
-                        <p>Humidity:<span class="current" id="humity"></span></p>
+                        <p>Humidity:<span class="current" id="humidity"></span></p>
                         <p>UV index:<span class="current" id="uvIndex"></span></p>
                     </div>
                 </div>
