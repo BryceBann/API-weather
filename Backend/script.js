@@ -23,5 +23,9 @@ var APIkey = "104b3d87a3f27b63c86227e77149ab4c"
 
 //function to display the data for city input by user
 function showCurrentWeather(event){
-    event.preventDefault();
+    if(searchCity.val().trim()!==""){
+        city=searchCity.val().trim();
+        showCurrentWeather(city);
+    }
 }
+
