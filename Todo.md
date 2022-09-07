@@ -11,5 +11,11 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 Mock-Up
 
--function to take user input and run through api and pull data, saves search history from user
--function to display current and future weather of the day and city adds to search history 
+currentWeather function to take the user input and run that through the api
+make weathe and wind speed change to proper measurements
+function for uv index/color code the conditions
+function to display next 5 day forecast
+function to show current weather after clicked in serach history
+function to clear serach history
+display last serached city after close to reopen
+
