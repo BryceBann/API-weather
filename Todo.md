@@ -19,3 +19,5 @@ function to show current weather after clicked in serach history
 function to clear serach history
 display last serached city after close to reopen
 
+
+previousCity is displaying data form api but city is not need to iterrate through array for city value after new serach or click on list item 

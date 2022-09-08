@@ -29,20 +29,41 @@ $("#search-button").on("click", function(event){
         console.log(pastCity);
     localStorage.setItem("previousCity", JSON.stringify(previousCity));
     console.log(city);
-    
-})
-currentWeather(city);
 
-//fetching the weather with the api using city name and key 
-function currentWeather(city) {
     var key = "104b3d87a3f27b63c86227e77149ab4c"
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${previousCity[1]}&appid=${key}&unit=imperial`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=imperial`)
     .then(response => response.json())
     .then(data =>{
         console.log(data)
-    })
-  
-    }
+  })
+    
+  var currentDisplay 
+})
+//  currentWeather(city);
+
+
+//fetching the weather with the api using city name and key 
+// function currentWeather(city) {
+//     var key = "104b3d87a3f27b63c86227e77149ab4c"
+//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=imperial`)
+//     .then(response => response.json())
+//     .then(data =>{
+//         console.log(data)
+//   })
+// }
+
+//possibly function to pull old data
+// previousSearch(previousCity);
+//     function previousSearch(previousCity) {
+//         var key = "104b3d87a3f27b63c86227e77149ab4c"
+//         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${previousCity[1]}&appid=${key}&unit=imperial`)
+//         .then(response => response.json())
+//         .then(data =>{
+//             console.log(data)
+//         })
+      
+//         }
+
 
 //uv index api call seperatley from weather
 // https://api.openweathermap.org/data/2.5/uvi?q=${city}&appid=${key}
