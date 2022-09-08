@@ -31,15 +31,16 @@ $("#search-button").on("click", function(event){
     console.log(city);
 
     var key = "104b3d87a3f27b63c86227e77149ab4c"
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=imperial`)
+    var units = "imperial"
+    var lang = "en"
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=imperial&lang=${lang}`)
     .then(response => response.json())
     .then(data =>{
         console.log(data)
+        document.getElementById("#temp").innerHTML = data.main.temp
   })
     
-  var currentDisplay 
 })
-//  currentWeather(city);
 
 
 //fetching the weather with the api using city name and key 
