@@ -33,26 +33,34 @@ $("#search-button").on("click", function(event){
     var key = "104b3d87a3f27b63c86227e77149ab4c"
     var units = "imperial"
     var lang = "en"
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=imperial&lang=${lang}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=${units}&lang=${lang}`)
     .then(response => response.json())
     .then(data =>{
         console.log(data)
-        document.getElementById("#temp").innerHTML = data.main.temp
+        var currrentCityValue = data['name']
+        var currentTempvalue = data['main']['temp']
+        var currentWindValue = data['wind']['speed']
+        var currentHumidityValue = data['main']['humidity']
+
+        currrentCity = currrentCityValue;
+        currentTemp = currentTempvalue;
+        currentWind = currentWindValue
+        currentHumidity = currentHumidityValue
+
+        $('#currentCity').append(currrentCity)
+        $('#temp').append(currentTemp)
+        $('#wind').append(currentWind)
+        $('#humidity').append(currentHumidity)
   })
-    
+  //currently not woking
+    // fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=104b3d87a3f27b63c86227e77149ab4c`)
+    // .then(response => response.json())
+    // .then(data =>{
+    //   console.log(data)
+    // })
 })
 
-
-//fetching the weather with the api using city name and key 
-// function currentWeather(city) {
-//     var key = "104b3d87a3f27b63c86227e77149ab4c"
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=imperial`)
-//     .then(response => response.json())
-//     .then(data =>{
-//         console.log(data)
-//   })
-// }
-
+//possibly needs more work
 //possibly function to pull old data
 // previousSearch(previousCity);
 //     function previousSearch(previousCity) {
@@ -66,5 +74,3 @@ $("#search-button").on("click", function(event){
 //         }
 
 
-//uv index api call seperatley from weather
-// https://api.openweathermap.org/data/2.5/uvi?q=${city}&appid=${key}
