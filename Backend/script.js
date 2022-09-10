@@ -6,7 +6,7 @@ var searchBtn = $("#search-button");
 var searchClear = $("#clearSearch");
 var currrentCity = $("#currentCity");
 var currentTemp = $("#temp");
-var curretnWind = $("#wind");
+var currentWind = $("#wind");
 var currentHumidity  = $("#humidity");
 var currentUv = $("#uvIndex");
 var pastCity = [];
@@ -22,6 +22,7 @@ previousCity.forEach(city => {
 //on the click add the user input to the array and add the city to list to display
 $("#search-button").on("click", function(event){
     event.preventDefault();
+    currrentCity=""
       city = $("#citySearch").val().trim();
         previousCity.push(city);
         searchedList = $(`<li class="list-group-item list-group-item-secondary">${city.toUpperCase()}</li>`);
@@ -53,12 +54,15 @@ $("#search-button").on("click", function(event){
         var Lon = currentLonValue
         console.log(Lat)
         console.log(Lon)
-        
-//displaying the current info on the html page
+
+        currentTemp = ((currentTemp-273.15)*1.8)+32;
+
+ //displaying the current info on the html page
         $('#currentCity').append(currrentCity)
         $('#temp').append(currentTemp)
         $('#wind').append(currentWind)
         $('#humidity').append(currentHumidity)
+        console.log(currentCity)
 //fetching the uv index through different api 
         fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}`)
         .then(response => response.json())

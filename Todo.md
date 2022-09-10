@@ -27,5 +27,6 @@ make previous city link clickable
 pull forecast api and dispaly on page
 convert all data to farenhet
 add in and pull icon api data as well as display 
+need currentweather function to only dispaly one city 
 
 
