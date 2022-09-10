@@ -56,6 +56,7 @@ $("#search-button").on("click", function(event){
         console.log(Lon)
 
         currentTemp = ((currentTemp-273.15)*1.8)+32;
+        currentTemp = Math.trunc(currentTemp)
 
  //displaying the current info on the html page
         $('#currentCity').append(currrentCity)
@@ -64,7 +65,7 @@ $("#search-button").on("click", function(event){
         $('#humidity').append(currentHumidity)
         console.log(currentCity)
 //fetching the uv index through different api 
-        fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}`)
+        fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}&units=imperial`)
         .then(response => response.json())
         .then(data =>{
           console.log(data)
