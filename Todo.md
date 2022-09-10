@@ -21,3 +21,11 @@ display last serached city after close to reopen
 
 
 previousCity is displaying data form api but city is not need to iterrate through array for city value after new serach or click on list item 
+
+show previous city serached weather if any
+make previous city link clickable 
+pull forecast api and dispaly on page
+convert all data to farenhet
+add in and pull icon api data as well as display 
+
+
