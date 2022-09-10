@@ -45,15 +45,18 @@ $("#search-button").on("click", function(event){
         var currentHumidityValue = data['main']['humidity']
         var currentLatValue = data['coord']['lat']
         var currentLonValue = data['coord']['lon']
+        var weatherIconValue = data['weather'][0]['icon']
 //Need to convert kelvin to farenhet
         currrentCity = currrentCityValue;
-        currentTemp = currentTempvalue;
-        currentWind = currentWindValue
-        currentHumidity = currentHumidityValue
+        currentTemp = Math.trunc(currentTempvalue);
+        currentWind = Math.trunc(currentWindValue);
+        currentHumidity = Math.trunc(currentHumidityValue)
+        weatherIcon = weatherIconValue
         var Lat = currentLatValue
         var Lon = currentLonValue
         console.log(Lat)
         console.log(Lon)
+        console.log(weatherIcon)
 
         currentTemp = ((currentTemp-273.15)*1.8)+32;
         currentTemp = Math.trunc(currentTemp)
@@ -71,23 +74,37 @@ $("#search-button").on("click", function(event){
           console.log(data)
           var currentUvValue = data['value']
 
-          currentUv = currentUvValue;
+          currentUv = Math.trunc(currentUvValue);
 
           $("#uvIndex").append(currentUv)
-        })
-  })
-})
 
+          $(".weatherIcon").attr(
+            "src",
+            " http://openweathermap.org/img/wn/" + weatherIcon +"@2x.png"
+            
+           );
+         })
+     });
+ })
 //possibly function to pull old data
     function previousSearch(previousCity) {
         var key = "104b3d87a3f27b63c86227e77149ab4c"
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${previousCity[1]}&appid=${key}&unit=imperial`)
         .then(response => response.json())
         .then(data =>{
-            console.log(data)
-        })
+            console.log(data);
+        });
       
-        }
+    }
+//clear search history from the previousCity in local storage
+    function clearHistory(event){
+        event.preventDefault();
+        pastCity=[];
+        localStorage.removeItem("previousCity");
+        document.location.reload();
+    }
 
-//forecast api 
-// "https://api.openweathermap.org/data/2.5/forecast?id="+cityid+"&appid="+APIKey;
+    $("#clearSearch").on("click",clearHistory);
+
+
+
