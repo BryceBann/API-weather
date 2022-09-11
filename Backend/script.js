@@ -1,5 +1,6 @@
 //making variables through html
 var city = "";
+//possibly remove declared variables ask tutor
 var searchedList = $("#search-history");
 var searchCity = $("#citySearch");
 var searchBtn = $("#search-button");
@@ -62,13 +63,14 @@ $("#search-button").on("click", function(event){
         currentTemp = Math.trunc(currentTemp)
 
  //displaying the current info on the html page
-        $('#currentCity').append(currrentCity)
+        $('#currentCity').append(" " + currrentCity)
         $('#temp').append(currentTemp)
         $('#wind').append(currentWind)
         $('#humidity').append(currentHumidity)
+        $('#date').text(moment().format('L'));
         console.log(currentCity)
 //fetching the uv index through different api 
-        fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}&units=imperial`)
+        fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}`)
         .then(response => response.json())
         .then(data =>{
           console.log(data)
@@ -83,6 +85,11 @@ $("#search-button").on("click", function(event){
             " http://openweathermap.org/img/wn/" + weatherIcon +"@2x.png"
             
            );
+           fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Lon}&appid=${key}`)
+           .then(response => response.json())
+           .then(data =>{
+             console.log(data)
+           })
          })
      });
  })

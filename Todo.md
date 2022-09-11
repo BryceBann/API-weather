@@ -25,8 +25,8 @@ previousCity is displaying data form api but city is not need to iterrate throug
 show previous city serached weather if any
 make previous city link clickable 
 pull forecast api and dispaly on page
-convert all data to farenhet
-add in and pull icon api data as well as display 
+convert all data to input
+pull icon api data as well as display for forecast
 need currentweather function to only dispaly one city 
 
 
