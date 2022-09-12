@@ -31,4 +31,3 @@ need currentweather function to only dispaly one city
 
 make forecast display next 5 day data
 history li clickable 
-only show current searched city

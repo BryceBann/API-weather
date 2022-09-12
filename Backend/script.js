@@ -17,16 +17,17 @@ var pastCity = [];
 var previousCity = JSON.parse(localStorage.getItem("previousCity")) || pastCity;
 console.log(previousCity)
 previousCity.forEach(city => {
-    searchedList = $(`<li class="list-group-item list-group-item-secondary">${city.toUpperCase()}</li>`);
+    searchedList = $(`<li class="list-group-item list-group-item-secondary" id="work">${city.toUpperCase()}</li>`);
     $("#search-history").append(searchedList);
 });
 //on the click add the user input to the array and add the city to list to display
-$("#search-button").on("click", function(event){
+// $("#search-button").on("click", function(event){
+    function displayCity(event){
     event.preventDefault();
     currrentCity=""
       city = $("#citySearch").val().trim();
         previousCity.push(city);
-        searchedList = $(`<li class="list-group-item list-group-item-secondary">${city.toUpperCase()}</li>`);
+        searchedList = $(`<li class="list-group-item list-group-item-secondary" id="work">${city.toUpperCase()}</li>`);
         $("#search-history").append(searchedList);
         console.log(pastCity);
     localStorage.setItem("previousCity", JSON.stringify(previousCity));
@@ -104,8 +105,8 @@ $("#search-button").on("click", function(event){
            .then(data =>{
              console.log(data)
              var index = 0;
-// work on the math 
-             for(let i =4; i < 25; i+=5) {
+// forecast function pulling next 5 days and display upcoming weather and 
+             for(let i =6; i < 40; i+=8) {
                 var forecast = data.list[i]
                 console.log(forecast)
                 var [date] = forecast.dt_txt.split(" ")
@@ -113,13 +114,17 @@ $("#search-button").on("click", function(event){
                 var futHum = forecast.main.humidity
                 var futWind = forecast.wind.speed
                 var icon = forecast.weather[0].icon
+// convert the temp, remove decimal from wind and temp
+                futTemp = ((futTemp-273.15)*1.8)+32;
+                futTemp = Math.trunc(futTemp)
+                futWind = Math.trunc(futWind)
 // grabing the weather icon for forecast
                 $("#img"+index).attr(
                     "src",
                     " http://openweathermap.org/img/wn/" + icon +"@2x.png"
                     
                    );
-
+//displaying the future weather
                 $('#date'+index).text(date);
                 $('#temp'+index).text(futTemp);
                 $('#hum'+index).text(futHum);
@@ -129,16 +134,19 @@ $("#search-button").on("click", function(event){
            })
          })
      });
- })
+ }
 // make li clickable a pull data
  function getPreviousCity(event){
     console.log(event)
   if(
     event.target.matches("li")
- ){console.log(event.target.textContent)}
+ ){console.log(event.target.textContent)
+currentCity = event.target.textContent
+console.log(currentCity)
+}
  }
 
- $("#search-history").on("click",getPreviousCity);
+ 
 
 
       
@@ -150,8 +158,9 @@ $("#search-button").on("click", function(event){
         localStorage.removeItem("previousCity");
         document.location.reload();
     }
-
+// buttons on page and li clickable
     $("#clearSearch").on("click",clearHistory);
-
+    $("#search-button").on("click",displayCity);
+    $("#search-history").on("click",getPreviousCity);
 
 
