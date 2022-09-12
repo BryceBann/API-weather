@@ -63,10 +63,10 @@ $("#search-button").on("click", function(event){
         currentTemp = Math.trunc(currentTemp)
 
  //displaying the current info on the html page
-        $('#currentCity').append(" " + currrentCity)
-        $('#temp').append(currentTemp)
-        $('#wind').append(currentWind)
-        $('#humidity').append(currentHumidity)
+        $('#currentCity').text(" " + currrentCity)
+        $('#temp').text(currentTemp)
+        $('#wind').text(currentWind)
+        $('#humidity').text(currentHumidity)
         $('#date').text(moment().format('L'));
         console.log(currentCity)
 //fetching the uv index through different api 
@@ -78,7 +78,7 @@ $("#search-button").on("click", function(event){
 
           currentUv = Math.trunc(currentUvValue);
 
-          $("#uvIndex").append(currentUv)
+          $("#uvIndex").text(currentUv)
         //   rund through if statements for color code uv level
           if (currentUv >= 0 && currentUv <= 2) {
             $("#uvIndex").css("background-color", "#3EA72D").css("color", "white");
@@ -99,40 +99,50 @@ $("#search-button").on("click", function(event){
             
            );
            //puling future data but not displaying needs work
-        //    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Lon}&appid=${key}`)
-        //    .then(response => response.json())
-        //    .then(data =>{
-        //      console.log(data)
-        //      for(let i =0; i < 5; i++) {
-        //         // var date = moment().format('L');
-        //         var futTemp = data['list'][i]['main']['temp']
-        //         var futHum = data['list'][i]['main']['humidity']
-        //         var futWind = data['list'][i]['wind']['speed']
+           fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Lon}&appid=${key}&exclude=minutely,hourly`)
+           .then(response => response.json())
+           .then(data =>{
+             console.log(data)
+             var index = 0;
+// work on the math 
+             for(let i =4; i < 25; i+=5) {
+                var forecast = data.list[i]
+                console.log(forecast)
+                var [date] = forecast.dt_txt.split(" ")
+                var futTemp = forecast.main.temp
+                var futHum = forecast.main.humidity
+                var futWind = forecast.wind.speed
+                var icon = forecast.weather[0].icon
+// grabing the weather icon for forecast
+                $("#img"+index).attr(
+                    "src",
+                    " http://openweathermap.org/img/wn/" + icon +"@2x.png"
+                    
+                   );
 
-        //         console.log(futTemp)
-        //         console.log(futHum)
-        //         console.log(futWind)
-
-        //         // $('#date'+i).append(date);
-        //         $('#temp0').append(futTemp);
-        //         $('#hum0').append(futHum);
-        //         $('#wind0').append(futWind);
-
-        //     }
-        //    })
+                $('#date'+index).text(date);
+                $('#temp'+index).text(futTemp);
+                $('#hum'+index).text(futHum);
+                $('#wind'+index).text(futWind);
+                index++
+            }
+           })
          })
      });
  })
-//possibly function to pull old data
-    function previousSearch(previousCity) {
-        var key = "104b3d87a3f27b63c86227e77149ab4c"
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${previousCity[1]}&appid=${key}&unit=imperial`)
-        .then(response => response.json())
-        .then(data =>{
-            console.log(data);
-        });
+// make li clickable a pull data
+ function getPreviousCity(event){
+    console.log(event)
+  if(
+    event.target.matches("li")
+ ){console.log(event.target.textContent)}
+ }
+
+ $("#search-history").on("click",getPreviousCity);
+
+
       
-    }
+    
 //clear search history from the previousCity in local storage
     function clearHistory(event){
         event.preventDefault();
