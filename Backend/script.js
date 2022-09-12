@@ -23,7 +23,7 @@ previousCity.forEach(city => {
 //on the click add the user input to the array and add the city to list to display
 // $("#search-button").on("click", function(event){
     function displayCity(event){
-    event.preventDefault();
+    // event.preventDefault();
     currrentCity=""
       city = $("#citySearch").val().trim();
         previousCity.push(city);
@@ -137,13 +137,11 @@ previousCity.forEach(city => {
  }
 // make li clickable a pull data
  function getPreviousCity(event){
-    console.log(event)
-  if(
-    event.target.matches("li")
- ){console.log(event.target.textContent)
-currentCity = event.target.textContent
-console.log(currentCity)
-}
+    var listEl = event.target;
+  if(event.target.matches("li")){
+city = listEl.textContent.trim();
+displayCity(city);
+    }
  }
 
  
