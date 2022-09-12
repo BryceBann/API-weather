@@ -12,10 +12,8 @@ var currentHumidity  = $("#humidity");
 var currentUv = $("#uvIndex");
 var pastCity = [];
 
-
 //if the local storage has cities add to array for use and display if empty us declaried array
 var previousCity = JSON.parse(localStorage.getItem("previousCity")) || pastCity;
-console.log(previousCity)
 previousCity.forEach(city => {
     searchedList = $(`<li class="list-group-item list-group-item-secondary" id="work">${city.toUpperCase()}</li>`);
     $("#search-history").append(searchedList);
@@ -24,14 +22,13 @@ previousCity.forEach(city => {
 // $("#search-button").on("click", function(event){
     function displayCity(event){
     // event.preventDefault();
-    currrentCity=""
+    console.log(event)
+    // currrentCity=""
       city = $("#citySearch").val().trim();
         previousCity.push(city);
         searchedList = $(`<li class="list-group-item list-group-item-secondary" id="work">${city.toUpperCase()}</li>`);
         $("#search-history").append(searchedList);
-        console.log(pastCity);
     localStorage.setItem("previousCity", JSON.stringify(previousCity));
-    console.log(city);
 //api key delcared fetching the data 
     var key = "104b3d87a3f27b63c86227e77149ab4c"
     var units = 'imperial'
@@ -39,7 +36,6 @@ previousCity.forEach(city => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&unit=${units}&lang=${lang}`)
     .then(response => response.json())
     .then(data =>{
-        console.log(data)
 //setting the fetched data to variables
         var currrentCityValue = data['name']
         var currentTempvalue = data['main']['temp']
@@ -65,16 +61,14 @@ previousCity.forEach(city => {
 
  //displaying the current info on the html page
         $('#currentCity').text(" " + currrentCity)
+        $('#date').text(moment().format('L'));
         $('#temp').text(currentTemp)
         $('#wind').text(currentWind)
         $('#humidity').text(currentHumidity)
-        $('#date').text(moment().format('L'));
-        console.log(currentCity)
 //fetching the uv index through different api 
         fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}`)
         .then(response => response.json())
         .then(data =>{
-          console.log(data)
           var currentUvValue = data['value']
 
           currentUv = Math.trunc(currentUvValue);
@@ -103,12 +97,10 @@ previousCity.forEach(city => {
            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Lon}&appid=${key}&exclude=minutely,hourly`)
            .then(response => response.json())
            .then(data =>{
-             console.log(data)
              var index = 0;
 // forecast function pulling next 5 days and display upcoming weather and 
              for(let i =6; i < 40; i+=8) {
                 var forecast = data.list[i]
-                console.log(forecast)
                 var [date] = forecast.dt_txt.split(" ")
                 var futTemp = forecast.main.temp
                 var futHum = forecast.main.humidity
@@ -135,27 +127,24 @@ previousCity.forEach(city => {
          })
      });
  }
-// make li clickable a pull data
- function getPreviousCity(event){
-    var listEl = event.target;
-  if(event.target.matches("li")){
-city = listEl.textContent.trim();
-displayCity(city);
-    }
- }
-
- 
-
-
-      
-    
 //clear search history from the previousCity in local storage
     function clearHistory(event){
-        event.preventDefault();
+        // event.preventDefault();
         pastCity=[];
         localStorage.removeItem("previousCity");
         document.location.reload();
     }
+
+    // make li clickable a pull data
+//  function getPreviousCity(event){
+//      clearHistory()
+//     var city = event.target.textContent.trim();
+//    if(event.target.matches("li")){
+// city = listEl.textContent.trim();
+// displayCity(city);
+//     }
+//  }
+
 // buttons on page and li clickable
     $("#clearSearch").on("click",clearHistory);
     $("#search-button").on("click",displayCity);

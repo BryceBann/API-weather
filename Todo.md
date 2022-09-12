@@ -31,3 +31,8 @@ need currentweather function to only dispaly one city
 
 make forecast display next 5 day data
 history li clickable 
+
+history clickable
+same city wont search
+wont last show city after refresh 
+click wont show after refresh
