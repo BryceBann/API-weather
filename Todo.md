@@ -29,4 +29,6 @@ convert all data to input
 pull icon api data as well as display for forecast
 need currentweather function to only dispaly one city 
 
-
+make forecast display next 5 day data
+history li clickable 
+only show current searched city

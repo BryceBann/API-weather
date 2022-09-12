@@ -49,7 +49,7 @@ $("#search-button").on("click", function(event){
         var weatherIconValue = data['weather'][0]['icon']
 //Need to convert kelvin to farenhet
         currrentCity = currrentCityValue;
-        currentTemp = Math.trunc(currentTempvalue);
+        currentTemp = currentTempvalue;
         currentWind = Math.trunc(currentWindValue);
         currentHumidity = Math.trunc(currentHumidityValue)
         weatherIcon = weatherIconValue
@@ -79,17 +79,47 @@ $("#search-button").on("click", function(event){
           currentUv = Math.trunc(currentUvValue);
 
           $("#uvIndex").append(currentUv)
+        //   rund through if statements for color code uv level
+          if (currentUv >= 0 && currentUv <= 2) {
+            $("#uvIndex").css("background-color", "#3EA72D").css("color", "white");
+        } else if (currentUv >= 3 && currentUv <= 5) {
+            $("#uvIndex").css("background-color", "#FFF300");
+        } else if (currentUv >= 6 && currentUv <= 7) {
+            $("#uvIndex").css("background-color", "#F18B00");
+        } else if (currentUv >= 8 && currentUv <= 10) {
+            $("#uvIndex").css("background-color", "#E53210").css("color", "white");
+        } else {
+            $("#uvIndex").css("background-color", "#B567A4").css("color", "white"); 
+        }; 
+        // grabbing the weather icon for currebt weather 
 
           $(".weatherIcon").attr(
             "src",
             " http://openweathermap.org/img/wn/" + weatherIcon +"@2x.png"
             
            );
-           fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Lon}&appid=${key}`)
-           .then(response => response.json())
-           .then(data =>{
-             console.log(data)
-           })
+           //puling future data but not displaying needs work
+        //    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Lat}&lon=${Lon}&appid=${key}`)
+        //    .then(response => response.json())
+        //    .then(data =>{
+        //      console.log(data)
+        //      for(let i =0; i < 5; i++) {
+        //         // var date = moment().format('L');
+        //         var futTemp = data['list'][i]['main']['temp']
+        //         var futHum = data['list'][i]['main']['humidity']
+        //         var futWind = data['list'][i]['wind']['speed']
+
+        //         console.log(futTemp)
+        //         console.log(futHum)
+        //         console.log(futWind)
+
+        //         // $('#date'+i).append(date);
+        //         $('#temp0').append(futTemp);
+        //         $('#hum0').append(futHum);
+        //         $('#wind0').append(futWind);
+
+        //     }
+        //    })
          })
      });
  })
