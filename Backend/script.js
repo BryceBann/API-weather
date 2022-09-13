@@ -19,11 +19,8 @@ previousCity.forEach(city => {
     $("#search-history").append(searchedList);
 });
 //on the click add the user input to the array and add the city to list to display
-// $("#search-button").on("click", function(event){
     function displayCity(event){
-    // event.preventDefault();
     console.log(event)
-    // currrentCity=""
       city = $("#citySearch").val().trim();
         previousCity.push(city);
         searchedList = $(`<li class="list-group-item list-group-item-secondary" id="work">${city.toUpperCase()}</li>`);
@@ -37,6 +34,7 @@ previousCity.forEach(city => {
     .then(response => response.json())
     .then(data =>{
 //setting the fetched data to variables
+console.log(data)
         var currrentCityValue = data['name']
         var currentTempvalue = data['main']['temp']
         var currentWindValue = data['wind']['speed']
@@ -52,19 +50,16 @@ previousCity.forEach(city => {
         weatherIcon = weatherIconValue
         var Lat = currentLatValue
         var Lon = currentLonValue
-        console.log(Lat)
-        console.log(Lon)
-        console.log(weatherIcon)
 
         currentTemp = ((currentTemp-273.15)*1.8)+32;
         currentTemp = Math.trunc(currentTemp)
 
  //displaying the current info on the html page
         $('#currentCity').text(" " + currrentCity)
-        $('#date').text(moment().format('L'));
         $('#temp').text(currentTemp)
         $('#wind').text(currentWind)
         $('#humidity').text(currentHumidity)
+        $('#date').text(moment().format('L'));
 //fetching the uv index through different api 
         fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${Lat}&lon=${Lon}`)
         .then(response => response.json())
@@ -129,21 +124,19 @@ previousCity.forEach(city => {
  }
 //clear search history from the previousCity in local storage
     function clearHistory(event){
-        // event.preventDefault();
         pastCity=[];
         localStorage.removeItem("previousCity");
         document.location.reload();
     }
 
-    // make li clickable a pull data
-//  function getPreviousCity(event){
-//      clearHistory()
-//     var city = event.target.textContent.trim();
-//    if(event.target.matches("li")){
-// city = listEl.textContent.trim();
-// displayCity(city);
-//     }
-//  }
+    // make li clickable a pull data does not work 
+ function getPreviousCity(event){
+   city = event.target.textContent.trim();
+   if(event.target.matches("li")){
+city = city.textContent
+displayCity(event);
+    }
+ }
 
 // buttons on page and li clickable
     $("#clearSearch").on("click",clearHistory);
